@@ -43,6 +43,15 @@ class CompanyTable:
                     {"new_name": name, "new_description": description}
                 )
 
+    def update_company(self, company_id: int, new_name: str, new_description: str = "") -> None:
+        with self.__db.connect() as conn:
+            with conn.begin():
+                conn.execute(
+                    self.__scripts["update_company"],
+                    {"company_id": company_id, "new_name":
+                     new_name, "new_description": new_description}
+                )
+
     def delete_company_by_id(self, company_id: int) -> None:
         with self.__db.connect() as conn:
             with conn.begin():
